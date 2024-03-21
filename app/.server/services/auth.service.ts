@@ -1,0 +1,6 @@
+// Blah blah...
+export const logIn = async (logInDto: { email: string; password: string }) => {
+  // const user = await db.findUserByEmail(logInDto.email)
+  // Validate user/password
+  // return...
+};

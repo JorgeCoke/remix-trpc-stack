@@ -1,6 +1,5 @@
 import { TRPCError, initTRPC } from "@trpc/server";
 import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
-import { appRouter } from "./router";
 
 /**
  * Your context holds data that all of your tRPC procedures will have access to,

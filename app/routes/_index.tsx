@@ -1,5 +1,6 @@
 import { type MetaFunction } from "@remix-run/node";
 import { trpc } from "~/lib/trpc";
+import { trpcVanilla } from "~/lib/trpc-vanilla";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,24 +10,48 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const welcome = trpc.welcome.useQuery({ name: "frontend visitor!" });
+  const hello = trpc.hello.useMutation();
+
   return (
     <div>
       <button
         onClick={async () => {
-          const res = await trpc.welcome.query({ name: "frontend visitor!" });
+          const res = await trpcVanilla.welcome.query({
+            name: "frontend visitor!",
+          });
           alert(JSON.stringify(res));
         }}
       >
-        Query Welcome
+        Query Welcome (Vanilla tRPC)
       </button>
       <button
         onClick={async () => {
-          const res = await trpc.hello.mutate({ name: "frontend world!" });
+          const res = await trpcVanilla.hello.mutate({
+            name: "frontend world!",
+          });
           alert(JSON.stringify(res));
         }}
       >
-        Mutate Hello
+        Mutate Hello (Vanilla tRPC)
       </button>
+      <br />
+      <hr />
+      {welcome.data && (
+        <p>Hello from ReactQuery tRPC {JSON.stringify(welcome.data)}</p>
+      )}
+      <button
+        onClick={() => {
+          hello.mutate({
+            name: "frontend world!",
+          });
+        }}
+      >
+        Mutate Hello (ReactQuery tRPC)
+      </button>
+      {hello.data && (
+        <p>Hello from ReactQuery tRPC {JSON.stringify(hello.data)}</p>
+      )}
     </div>
   );
 }
