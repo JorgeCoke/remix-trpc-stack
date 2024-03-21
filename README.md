@@ -1,36 +1,27 @@
-# Welcome to Remix + Vite!
+<p align="center">
+    <img alt="Remix and tRPC Logo" src="public/repo-logo.png" width="512"/>
+</p>
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+# 💿 Remix + tRPC experimental stack [Lab 🧪]
 
-## Development
+End-to-end type safety from Remix is already present with its Loaders/Actions. What if we could replace them with tRPC calls?
 
-Run the Vite dev server:
+## What's included?
 
-```shellscript
-npm run dev
+- Remix: https://remix.run/
+- tRPC: https://trpc.io/
+- ReactQuery tRPC: https://trpc.io/docs/client/react
+
+## Goals/Features
+
+- Serve tRPC client from Remix Server side
+- Do not use Remix Loaders/Actions, use tRPC calls instead
+- Get e2e type safety
+- Include "Vanilla tRPC" + "ReactQuery tRPC" usage
+
+### Set up
+
 ```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
+npm ci                          # Install dependencies
+npm run dev                     # Launch project locally
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
