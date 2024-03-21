@@ -1,4 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "@remix-run/node";
+import { trpc } from "~/lib/trpc";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,33 +10,23 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div>
+      <button
+        onClick={async () => {
+          const res = await trpc.welcome.query({ name: "frontend visitor!" });
+          alert(JSON.stringify(res));
+        }}
+      >
+        Query Welcome
+      </button>
+      <button
+        onClick={async () => {
+          const res = await trpc.hello.mutate({ name: "frontend world!" });
+          alert(JSON.stringify(res));
+        }}
+      >
+        Mutate Hello
+      </button>
     </div>
   );
 }
